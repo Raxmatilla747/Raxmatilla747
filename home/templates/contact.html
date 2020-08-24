@@ -1,0 +1,58 @@
+{% extends 'homebase.html' %}
+{% load static %}
+{% block title %}Contact Us - {{ setting.title }}{% endblock %}
+{% block keywords %}{{ setting.keywords }}{% endblock %}
+{% block description %}{{ setting.description }}{% endblock %}
+
+{% block sidebar %}{% include 'sidebar.html' %} {% endblock %}
+
+{% block body %}
+    <div id="breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="/">Home</a></li>
+                <li class="active">Contact Us</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+         <div class="container">
+             <div class="row">
+                 <div class="col-md-4">
+                     <form id="contact-form" class="clearfix" method="post">
+
+                         <div class="billing-details">
+                             {% csrf_token %}
+                             <div class="section-title">
+                                 <h3 class="title">Contact Form</h3>
+                             {% if messages %}
+                                 {% for message in messages %}
+                                    <div class="alert alert-{{ message.tags }}" role="alert">
+                                        {{ message }}
+                                    </div>
+                                 {% endfor %}
+                             {% endif %}
+                             </div>
+                             {{ form.as_table }}
+                             <input type="submit" value="SEND FORM">
+                         </div>
+                     </form>
+                 </div>
+                 <div class="col-md-8">
+                     <div class="contact">
+                         <div class="section-title">
+                             <h3>Contact Information</h3>
+                         </div>
+                         <div class="text">
+                             {{ setting.contact|safe }}
+                         </div>
+
+                     </div>
+                 </div>
+
+             </div>
+         </div>
+    </div>
+{% endblock %}
+{% block footer %} {% include 'footer.html' %}{% endblock %}

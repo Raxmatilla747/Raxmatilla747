@@ -1,0 +1,61 @@
+{% extends 'homebase.html'%}
+{% load static %}
+{% block title %} Sign Up Page {% endblock %}
+{% block description %}  {{ category.description }}{% endblock %}
+{% block keywords %}  {{ category.keywords }}{% endblock %}
+
+{% block sidebar %}{% include 'sidebar.html' %} {% endblock %}
+
+{% block body %}
+    	<!-- BREADCRUMB -->
+	<div id="breadcrumb">
+		<div class="container">
+			<ul class="breadcrumb">
+				<li><a href="/">Home</a></li>
+				<li class="active"> Sign Up Page</li>
+			</ul>
+		</div>
+	</div>
+	<!-- /BREADCRUMB -->
+
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="order-summary">
+                    <div class="section-title">
+                        <h3 class="title">Sign Up Form:</h3>
+                    </div>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    <form  method="post">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            <p>
+                            {{ field.label_tag }}<br>
+                            {{ field }}
+                            {% if field.help_text %}
+                                <small style="">{{ field.help_text }}</small>
+                            {% endif %}
+                            {% for error in field.errors %}
+                                <p style="">{{ error }}</p>
+
+                            {% endfor %}
+                            </p>
+
+                        {% endfor %}
+                        <button type="submit">Sign Up</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+ {% endblock %}
+{% block footer %}{% include 'footer.html' %} {% endblock %}

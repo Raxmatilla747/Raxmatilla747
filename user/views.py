@@ -32,6 +32,7 @@ def user_update(request):
             profile_form.save()
             messages.success(request, 'Your account has been updated!')
             return HttpResponseRedirect('/user')
+    else:
         category = Category.objects.all()
         user_form = UserUpdateForm(instance=request.user)
         profile_form = ProfileUpdateForm(instance=request.user.userprofile)
@@ -57,7 +58,11 @@ def user_password(request):
     else:
         category = Category.objects.all()
         form = PasswordChangeForm(request.user)
-        return render(request, 'user_password.html', { 'form':form, 'category':category})
+        context = {
+            'form': form,
+            'category': category
+        }
+        return render(request, 'user_password.html', context)
 
 
 

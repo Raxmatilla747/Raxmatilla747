@@ -91,7 +91,7 @@
 							{% if user.id is not None %}
                             <div class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true">
 								<div class="header-btns-icon">
-									<img src="{{ request.session.userimage }}" style="height: 20px; border-radius: 40%">
+									<img src="{{ profile.image.url }}" style="height: 35px; border-radius: 50%">
 								</div>
 								<strong class="text-uppercase">My Account <i class="fa fa-caret-down"></i></strong>
 							</div>
@@ -99,7 +99,7 @@
 							<a href="/login/" class="text-uppercase">Login</a> / <a href="/signup/" class="text-uppercase">Sign Up</a>
 							{% endif %}
                             <ul class="custom-menu">
-								<li><a href="/user"><i class="fa fa-user-o"></i> My Account</a></li>
+								<li><a href="/user/"><i class="fa fa-user-o"></i> My Account</a></li>
 								<li><a href="/user/favorites"><i class="fa fa-heart-o"></i> My Wishlist</a></li>
 								<li><a href="/user/orders/"><i class="fa fa-exchange"></i> Compare</a></li>
 								<li><a href="/user/comments"><i class="fa fa-check"></i> Checkout</a></li>

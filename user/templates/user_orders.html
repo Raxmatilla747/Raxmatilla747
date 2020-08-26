@@ -1,0 +1,40 @@
+{% extends 'homebase.html'%}
+{% load static %}
+{% block title %} Login Page {% endblock %}
+{% block description %}  {{ category.description }}{% endblock %}
+{% block keywords %}  {{ category.keywords }}{% endblock %}
+
+{% block sidebar %}{% include 'sidebar.html' %} {% endblock %}
+
+{% block body %}
+    	<!-- BREADCRUMB -->
+	<div id="breadcrumb">
+		<div class="container">
+			<ul class="breadcrumb">
+				<li><a href="/">Home</a></li>
+				<li class="active"> Login Page</li>
+			</ul>
+		</div>
+	</div>
+	<!-- /BREADCRUMB -->
+
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="order-summary">
+                    <div class="section-title">
+                        <h3 class="title">Orders:</h3>
+                    </div>
+                    <div class="pull-right">
+                        <a href="/order/orderproduct" class="primary-btn">Place Order</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+ {% endblock %}
+{% block footer %}{% include 'footer.html' %} {% endblock %}

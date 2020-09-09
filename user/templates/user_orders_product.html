@@ -1,0 +1,68 @@
+{% extends 'homebase.html'%}
+{% load static %}
+{% block title %} User Orders Product {% endblock %}
+{% block description %}  {{ category.description }}{% endblock %}
+{% block keywords %}  {{ category.keywords }}{% endblock %}
+
+{% block sidebar %}{% include 'sidebar.html' %} {% endblock %}
+
+{% block body %}
+    	<!-- BREADCRUMB -->
+	<div id="breadcrumb">
+		<div class="container">
+			<ul class="breadcrumb">
+				<li><a href="/">Home</a></li>
+				<li class="active"> User Orders Product</li>
+			</ul>
+		</div>
+	</div>
+	<!-- /BREADCRUMB -->
+
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="order-summary">
+
+                  {% include 'userpanel.html' %}
+
+                </div>
+
+                 <div class="col-md-9">
+                    <table class="shopping-cart-table">
+                        <tr>
+                            <th class="text-center">ID:</th>
+                            <th class="text-center">Product Name:</th>
+                            <th class="text-center">Price:</th>
+                            <th class="text-center">Quantity:</th>
+                            <th class="text-center">Amount:</th>
+                            <th class="text-center">Status:</th>
+                            <th class="text-center">Date:</th>
+                        </tr>
+                        {% for rs in orders %}
+                            <tr>
+                                <td class="text-left"><a href="/product/{{ rs.product_id }}/{{ rs.product.slug }}">
+                                    <img src="{{ rs.product.image.url }}" style="height: 200px" alt="">
+                                </a></td>
+                                <td class="text-left">{{ rs.product.title }}</td>
+                                <td class="text-left">{{ rs.price }}</td>
+                                <td class="text-left">{{ rs.quantity }}</td>
+                                <td class="text-left">{{ rs.amount }}</td>
+                                <td class="text-left">{{ rs.status }}</td>
+                                <td class="text-left">{{ rs.create_at }}</td>
+                                <td class="text-left"><a class="primary-btn" href="/order/ordersproductdetail/{{ rs.id }}/{{ rs.order.id }}">Detail</a>{{ rs.product.title }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+
+                 </div>
+                </div>
+            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+ {% endblock %}
+{% block footer %}{% include 'footer.html' %} {% endblock %}

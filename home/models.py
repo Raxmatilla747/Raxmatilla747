@@ -65,4 +65,17 @@ class ContactForm(ModelForm):
             'email': TextInput(attrs={'class': 'input', 'placeholder': 'Email'}),
             'message': Textarea(attrs={'class': 'input', 'placeholder': 'Your message', 'rows': '5'}),
         }
-
+class FAQ(models.Model):
+    STATUS = (
+        ('True','Mavjud'),
+        ('Muhim', 'Muhim'),
+        ('False', 'Mavjud emas'),
+    )
+    ordernumber = models.IntegerField()
+    question = models.CharField(max_length=255)
+    answer = RichTextUploadingField()
+    status = models.CharField(max_length=15, choices=STATUS, default='True')
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return self.question

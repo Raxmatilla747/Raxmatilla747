@@ -21,7 +21,10 @@
 <div class="section">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-3">
+                  {% include 'userpanel.html' %}
+            </div>
+            <div class="col-md-9">
                 <div class="order-summary">
                     <div class="section-title">
                         <h3 class="title">User Profile Inf.</h3>
@@ -36,7 +39,7 @@
                         <td><img src="{{ profile.image.url }}" style="height: 200px; width: 120px" alt=""></td>
                         <tr>
                             <th class="text-left">Name Surname</th>
-                            <td class="text-left">{{ user.first_name }}{{ user.last_name }}</td>
+                            <td class="text-left">{{ user.first_name }}  {{ user.last_name }}</td>
                         </tr>
                         <tr>
                             <th class="text-left">Email</th>
@@ -59,11 +62,12 @@
                             <td class="text-left">{{ profile.country }}</td>
                         </tr>
                     </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
 </div>
- {% endblock %}
+{% endblock %}
 {% block footer %}{% include 'footer.html' %} {% endblock %}

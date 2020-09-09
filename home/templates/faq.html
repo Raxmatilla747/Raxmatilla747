@@ -1,0 +1,54 @@
+{% extends 'homebase.html' %}
+{% load static %}
+{% block title %} FAQ - {{ setting.title }}{% endblock %}
+{% block description %}  {{ setting.description }}{% endblock %}
+{% block keywords %}  {{ setting.keywords }}{% endblock %}
+
+{% block sidebar %}{% include 'sidebar.html' %} {% endblock %}
+{% block head %}
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+      $( function() {
+        $( "#accordion" ).accordion();
+      } );
+      </script>
+{% endblock %}
+{% block body %}
+    	<!-- BREADCRUMB -->
+	<div id="breadcrumb">
+		<div class="container">
+			<ul class="breadcrumb">
+				<li><a href="/">Home</a></li>
+				<li class="active">FAQ</li>
+			</ul>
+		</div>
+	</div>
+	<!-- /BREADCRUMB -->
+
+	<!-- section -->
+	<div class="section">
+		<!-- container -->
+		<div class="container">
+			<!-- row -->
+			<div class="row">
+                <div id="accordion">
+                    {% for rs in faq %}
+                        <h2>{{ rs.question }}</h2>
+                      <div>
+                          <p>
+                            {{ rs.answer|safe }}
+                         </p>
+                      </div>
+                    {% endfor %}
+                </div>
+
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</div>
+	<!-- /section -->
+
+ {% endblock %}
+{% block footer %}{% include 'footer.html' %} {% endblock %}

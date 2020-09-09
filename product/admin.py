@@ -1,5 +1,6 @@
+import admin_thumbnails
 from django.contrib import admin
-from product.models import Category, Product, Images, Comment
+from product.models import Category, Product, Images, Comment, Variants, Size, Color
 from mptt.admin import DraggableMPTTAdmin
 
 # Register your models here.
@@ -37,15 +38,30 @@ class CategoryAdmin2(DraggableMPTTAdmin):
     def related_products_cumulative_count(self,instance):
         return instance.products_cumulative_count
     related_products_cumulative_count.short_description = 'Related products (in tree)'
+@admin_thumbnails.thumbnail('image')
 class ProductImageInline(admin.TabularInline):
     model = Images
+    readonly_fields = ('id',)
     extra = 5
-
+class ProductVariantsInline(admin.TabularInline):
+    model = Variants
+    readonly_fields = ('image_tag',)
+    extra = 1
+    show_change_link = True
+@admin_thumbnails.thumbnail('image')
+class ImagesAdmin(admin.ModelAdmin):
+    list_display = ['image', 'title', 'image_thumbnail']
+class ColorAdmin(admin.ModelAdmin):
+    list_display = ['name', 'code']
+class SizeAdmin(admin.ModelAdmin):
+    list_display = ['name','code']
+class VariantsAdmin(admin.ModelAdmin):
+    list_display = ['title','product','color','size','price','quantity','image_tag']
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['title', 'category', 'status', 'image_tag']
     list_filter = ['category']
     readonly_fields = ('image_tag',)
-    inlines = [ProductImageInline]
+    inlines = [ProductImageInline, ProductVariantsInline]
     prepopulated_fields = {'slug': ('title',)}
 class CommentAdmin(admin.ModelAdmin):
     list_display = ['subject', 'comment', 'status', 'create_at']
@@ -56,3 +72,6 @@ admin.site.register(Category, CategoryAdmin2)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(Images)
+admin.site.register(Size, SizeAdmin)
+admin.site.register(Variants, VariantsAdmin)
+admin.site.register(Color, ColorAdmin)
